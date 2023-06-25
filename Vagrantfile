@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "shell", 
-    name: "install-essential-tools", 
+    name: "setup", 
     path: "setup.sh", 
     privileged: false, 
     env: {
