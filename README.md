@@ -1,4 +1,4 @@
-# Provisioning Local Development Environment With Virtualbox And Vagrant
+# Provisioning Local Development Environment with Virtualbox and Vagrant
 
 [https://www.virtualbox.org/](https://www.virtualbox.org/)
 
