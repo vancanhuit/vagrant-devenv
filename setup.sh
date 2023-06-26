@@ -57,7 +57,7 @@ install_k8s_tools() {
     sudo install --owner=root --group=root --mode=0755 kubectl /usr/local/bin/
     rm --force --verbose ./kubectl
 
-    curl --location --output-file ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+    curl --location --output ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
     sudo install --owner=root --group=root --mode=0755 kind /usr/local/bin/
     rm --force --verbose ./kind
 }
