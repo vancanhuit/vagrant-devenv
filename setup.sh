@@ -55,11 +55,11 @@ install_docker() {
 install_k8s_tools() {
     curl --location --remote-name "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     sudo install --owner=root --group=root --mode=0755 kubectl /usr/local/bin/
-    rm -fv ./kubectl
+    rm --force --verbose ./kubectl
 
     curl --location --output-file ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
     sudo install --owner=root --group=root --mode=0755 kind /usr/local/bin/
-    rm -fv ./kind
+    rm --force --verbose ./kind
 }
 
 update_system
