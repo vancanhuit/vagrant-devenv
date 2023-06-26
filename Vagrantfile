@@ -11,13 +11,15 @@ Vagrant.configure("2") do |config|
     vb.cpus = 2
   end
 
-  config.vm.provision "shell", 
-    name: "setup", 
-    path: "setup.sh", 
-    privileged: false, 
-    env: {
-      "INSTALL_STARSHIP" => "yes",
-      "INSTALL_DOCKER" => "yes",
-      "INSTALL_K8S_TOOLS" => "yes",
+  config.vm.provision "shell" do |s|
+    s.name = "setup"
+    s.path = "setup.sh"
+    s.privileged = false
+    s.reboot = true
+    s.env = {
+      "INSTALL_STARSHIP" => ENV["INSTALL_STARSHIP"] || "",
+      "INSTALL_DOCKER" => ENV["INSTALL_DOCKER"] || "",
+      "INSTALL_K8S_TOOLS" => ENV["INSTALL_K8S_TOOLS"] || "",
     }
+  end
 end

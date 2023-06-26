@@ -5,7 +5,6 @@
 [https://www.vagrantup.com/](https://www.vagrantup.com/)
 
 ```sh
-$ vagrant up
-$ vagrant reload
+$ INSTALL_STARSHIP=1 INSTALL_DOCKER=1 INSTALL_K8S_TOOLS=1 vagrant up
 ```
 
