@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "debian/bookworm64"
+  config.vm.box = "bento/debian-12"
 
   config.vm.network "private_network", ip: "192.168.56.10"
 

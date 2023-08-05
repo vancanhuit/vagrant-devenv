@@ -10,7 +10,10 @@ update_system() {
     sudo apt-get update
     sudo apt-get --quiet --yes \
                 --option "Dpkg::Options::=--force-confdef" \
-                --option "Dpkg::Options::=--force-confold" upgrade
+                --option "Dpkg::Options::=--force-confold" dist-upgrade
+
+    latest_kernel_version=$(sudo find /boot/ -name 'vmlinuz-*' -printf "%T+ %p\n" | sort -r | head -1 | awk '{print $2}' | xargs -n 1 basename | sed -n 's/vmlinuz-//p')
+    sudo apt-get install --quiet --yes linux-headers-${latest_kernel_version}
 }
 
 install_basic_tools() {
@@ -24,7 +27,7 @@ install_basic_tools() {
 }
 
 install_starship() {
-    curl --location --output ./starship.tar.gz https://github.com/starship/starship/releases/download/v1.15.0/starship-x86_64-unknown-linux-gnu.tar.gz
+    curl --location --output ./starship.tar.gz https://github.com/starship/starship/releases/download/v1.16.0/starship-x86_64-unknown-linux-gnu.tar.gz
     tar --verbose --gunzip --extract --file starship.tar.gz
     sudo install --owner=root --group=root --mode=0755 starship /usr/local/bin
     rm --force --verbose ./starship.tar.gz starship

@@ -6,6 +6,7 @@
 
 ```sh
 $ INSTALL_STARSHIP=1 INSTALL_DOCKER=1 INSTALL_K8S_TOOLS=1 vagrant up
+$ vagrant reload
 $ vagrant ssh
 ```
 
