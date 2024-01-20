@@ -39,7 +39,7 @@ install_basic_tools() {
 }
 
 install_starship() {
-    curl --location --output ./starship.tar.gz https://github.com/starship/starship/releases/download/v1.16.0/starship-x86_64-unknown-linux-gnu.tar.gz
+    curl --location --output ./starship.tar.gz https://github.com/starship/starship/releases/download/v1.17.1/starship-x86_64-unknown-linux-gnu.tar.gz
     tar --verbose --gunzip --extract --file starship.tar.gz
     sudo install --owner=root --group=root --mode=0755 starship /usr/local/bin
     rm --force --verbose ./starship.tar.gz starship
