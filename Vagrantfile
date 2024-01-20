@@ -15,7 +15,6 @@ Vagrant.configure("2") do |config|
     s.name = "setup"
     s.path = "setup.sh"
     s.privileged = false
-    s.reboot = true
     s.env = {
       "INSTALL_STARSHIP" => ENV["INSTALL_STARSHIP"] || "",
       "INSTALL_DOCKER" => ENV["INSTALL_DOCKER"] || "",

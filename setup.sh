@@ -6,20 +6,32 @@ set -o errexit
 export DEBIAN_FRONTEND=noninteractive
 export DEBIAN_PRIORITY=critical
 
+echo "grub-pc grub-pc/install_devices multiselect /dev/sda1" | sudo debconf-set-selections
+
 update_system() {
     sudo apt-get update
     sudo apt-get --quiet --yes \
                 --option "Dpkg::Options::=--force-confdef" \
-                --option "Dpkg::Options::=--force-confold" dist-upgrade
+                --option "Dpkg::Options::=--force-confold" \
+                dist-upgrade
 
-    latest_kernel_version=$(sudo find /boot/ -name 'vmlinuz-*' -printf "%T+ %p\n" | sort -r | head -1 | awk '{print $2}' | xargs -n 1 basename | sed -n 's/vmlinuz-//p')
+    sudo timedatectl set-timezone 'Asia/Ho_Chi_Minh'
+    sudo dpkg-reconfigure --frontend=${DEBIAN_FRONTEND} tzdata
+
+    latest_kernel_version=$(sudo find /boot/ -name 'vmlinuz-*' -printf "%T+ %p\n" | \
+                            sort -r | head -1 | awk '{print $2}' | \
+                            xargs -n 1 basename | sed -n 's/vmlinuz-//p')
     sudo apt-get install --quiet --yes linux-headers-${latest_kernel_version}
 }
 
 install_basic_tools() {
     sudo apt-get --quiet --yes install git vim curl wget \
                     htop tmux jq tree net-tools \
-                    ca-certificates gnupg
+                    ca-certificates gnupg resolvconf
+
+    echo "nameserver 1.1.1.1" | sudo tee /etc/resolvconf/resolv.conf.d/head
+    echo "nameserver 1.0.0.1" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+    sudo resolvconf -u
 
     cp --verbose /vagrant/.vimrc ~/.vimrc
     cp --verbose /vagrant/.tmux.conf ~/.tmux.conf
